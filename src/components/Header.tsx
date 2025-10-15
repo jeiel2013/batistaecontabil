@@ -24,7 +24,7 @@ const Header: React.FC = () => {
     if (href) {
       const element = document.querySelector(href);
       if (element) {
-        const headerOffset = 90;
+        const headerOffset = document.querySelector('header')?.offsetHeight || 90;
         const elementPosition = element.getBoundingClientRect().top;
         const offsetPosition =
           elementPosition + window.pageYOffset - headerOffset;
