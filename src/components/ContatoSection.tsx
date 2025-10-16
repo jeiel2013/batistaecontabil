@@ -21,9 +21,9 @@ const ContatoSection: React.FC = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 lg:gap-12 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-8 lg:gap-12 max-w-6xl mx-auto items-stretch">
           {/* Informações de Contato */}
-          <div className="space-y-4">
+          <div className="space-y-4 flex flex-col">
             <Card className="bg-white/10 border-white/20 backdrop-blur-sm hover:bg-white/15 transition-all duration-300">
               <CardContent className="flex items-start gap-3 p-4">
                 <div className="bg-blue-claro p-2 rounded-lg">
@@ -96,13 +96,13 @@ const ContatoSection: React.FC = () => {
           </div>
 
           {/* Formulário de Contato */}
-          <div>
-            <Card className="bg-white border-none shadow-xl">
-              <CardContent className="p-8">
+          <div className="flex flex-col h-full">
+            <Card className="bg-white border-none shadow-xl flex flex-col h-full">
+              <CardContent className="p-8 flex flex-col flex-1">
                 <h3 className="text-3xl font-bold text-blue-main mb-6">
                   Envie uma Mensagem
                 </h3>
-                <form className="space-y-5">
+                <form className="space-y-5 flex flex-col flex-1">
                   <div>
                     <label
                       htmlFor="nome"
@@ -148,7 +148,7 @@ const ContatoSection: React.FC = () => {
                     />
                   </div>
 
-                  <div>
+                  <div className="flex-1 flex flex-col">
                     <label
                       htmlFor="mensagem"
                       className="block text-sm font-medium text-gray-700 mb-2"
@@ -158,14 +158,13 @@ const ContatoSection: React.FC = () => {
                     <Textarea
                       id="mensagem"
                       placeholder="Como podemos ajudar?"
-                      rows={5}
-                      className="w-full resize-none"
+                      className="w-full resize-none flex-1"
                     />
                   </div>
 
                   <Button
                     type="submit"
-                    className="w-full bg-blue-main hover:bg-blue-claro text-white text-lg py-6 font-semibold shadow-lg transition-all duration-300"
+                    className="w-full bg-blue-main hover:bg-blue-claro text-white text-lg py-6 font-semibold shadow-lg transition-all duration-300 mt-auto"
                   >
                     <Send className="w-5 h-5 mr-2" />
                     Enviar Mensagem

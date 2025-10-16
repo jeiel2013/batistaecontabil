@@ -1,4 +1,5 @@
 import ContatoSection from './components/ContatoSection'
+import FooterSection from './components/FooterSection'
 import Header from './components/Header'
 import HomeSection from './components/HomeSection'
 import ServicosSection from './components/ServicosSection'
@@ -13,6 +14,7 @@ function App() {
         <SobreSection />
         <ServicosSection />
         <ContatoSection />
+        <FooterSection />
       </main>
     </>
   )
