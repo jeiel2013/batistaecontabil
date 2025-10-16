@@ -1,4 +1,4 @@
-import { Mail, Phone, MapPin } from "lucide-react";
+import { Mail, Phone, MapPin, InstagramIcon } from "lucide-react";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "./ui/hover-card";
 import { Button } from "./ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
@@ -81,6 +81,15 @@ const FooterSection: React.FC = () => {
                 <MapPin className="w-4 h-4 text-white" />
                 <span className="text-white text-sm">São Paulo - SP</span>
               </div>
+              <div className="flex items-center space-x-2">
+                <InstagramIcon className="w-4 h-4 text-white" />
+                <a
+                  className="text-white text-sm"
+                  href="https://www.instagram.com/contabilidade.batistaoficial/"
+                >
+                  contabilidade.batistaoficial
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -95,24 +104,27 @@ const FooterSection: React.FC = () => {
             reservados.
           </p>
           <p className="text-white text-sm mt-4 md:mt-0">
-            Desenvolvido por <HoverCard>
-                <HoverCardTrigger asChild>
-                    <Button variant="link" className="text-white">@jeiel2013</Button>
-                </HoverCardTrigger>
-                <HoverCardContent className="w-80">
-                    <div className="flex justify-between gap-4">
-                        <Avatar>
-                            <AvatarImage src="https://github.com/jeiel2013.png" />
-                            <AvatarFallback>Jeiel</AvatarFallback>
-                        </Avatar>
-                        <div className="space-y-1">
-                            <h4 className="text-sm font-semibold">@jeiel2013</h4>
-                            <p className="text-sm">
-                                Desenvolvedor Full-Stack - Instagram: @jeiel2013
-                            </p>
-                        </div>
-                    </div>
-                </HoverCardContent>
+            Desenvolvido por{" "}
+            <HoverCard>
+              <HoverCardTrigger asChild>
+                <Button variant="link" className="text-white">
+                  @jeiel2013
+                </Button>
+              </HoverCardTrigger>
+              <HoverCardContent className="w-80">
+                <div className="flex justify-between gap-4">
+                  <Avatar>
+                    <AvatarImage src="https://github.com/jeiel2013.png" />
+                    <AvatarFallback>Jeiel</AvatarFallback>
+                  </Avatar>
+                  <div className="space-y-1">
+                    <h4 className="text-sm font-semibold">@jeiel2013</h4>
+                    <p className="text-sm">
+                      Desenvolvedor Full-Stack - Instagram: @jeiel2013
+                    </p>
+                  </div>
+                </div>
+              </HoverCardContent>
             </HoverCard>
           </p>
         </div>
