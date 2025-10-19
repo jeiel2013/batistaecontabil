@@ -24,10 +24,11 @@ const Header: React.FC = () => {
     if (href) {
       const element = document.querySelector(href);
       if (element) {
-        const headerOffset = document.querySelector('header')?.offsetHeight || 90;
+        const headerHeight =
+          document.querySelector("header")?.offsetHeight || 90;
         const elementPosition = element.getBoundingClientRect().top;
         const offsetPosition =
-          elementPosition + window.pageYOffset - headerOffset;
+          elementPosition + window.pageYOffset - headerHeight;
         window.scrollTo({ top: offsetPosition, behavior: "smooth" });
       }
     }
@@ -41,8 +42,12 @@ const Header: React.FC = () => {
           : "bg-blue-main"
       }`}
     >
-      <div className="container mx-auto flex justify-between items-center px-6 py-4 lg:px-10 lg:py-5">
-        <a href="#home" onClick={handleScroll} className="flex items-center">
+      <div className="container mx-auto flex justify-center md:justify-between items-center px-6 py-4 lg:px-10 lg:py-5">
+        <a
+          href="#home"
+          onClick={handleScroll}
+          className="flex items-center md:flex-none"
+        >
           <img
             src={batistaecontabil}
             alt="Batista E-Contábil"

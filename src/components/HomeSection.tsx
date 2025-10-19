@@ -7,9 +7,9 @@ const HomeSection: React.FC = () => {
       id="home"
       className="relative h-screen flex items-center bg-gradient-to-br from-white to-blue-50 scroll-mt-16 pb-10"
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-12 flex flex-col md:flex-row items-center justify-between gap-8 md:gap-16">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-12 flex flex-col-reverse md:flex-row items-center justify-between gap-8 md:gap-16">
         {/* Texto principal */}
-        <div className="flex-1 max-w-xl space-y-6 sm:space-y-8 md:space-y-8 md:translate-y-[-20px]">
+        <div className="flex-1 max-w-xl space-y-6 sm:space-y-8 md:space-y-8 md:translate-y-[-20px] order-2 md:order-1">
           <div>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-blue-claro leading-tight mb-2 sm:mb-3">
               Contabilidade completa

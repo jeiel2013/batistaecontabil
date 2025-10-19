@@ -119,7 +119,7 @@ const FooterSection: React.FC = () => {
                   </Avatar>
                   <div className="space-y-1">
                     <h4 className="text-sm font-semibold">@jeiel2013</h4>
-                    <p className="text-sm">Desenvolvedor Full-Stack - Instagra: @jeiel2013</p>
+                    <p className="text-sm">Desenvolvedor Full-Stack - Instagram: @jeiel2013</p>
                   </div>
                 </div>
               </HoverCardContent>

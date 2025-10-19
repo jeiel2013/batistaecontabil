@@ -88,7 +88,7 @@ const ServicosSection = () => {
   const handleWhatsApp = () => {
     const area = servicosData[areaSelecionada]?.titulo || "serviços contábeis";
     const mensagem = `Olá! Gostaria de saber mais sobre os serviços para ${area}.`;
-    const telefone = "5531999999999"; // Substitua pelo número real
+    const telefone = "5531999999999";
     const url = `https://wa.me/${telefone}?text=${encodeURIComponent(
       mensagem
     )}`;
@@ -100,19 +100,19 @@ const ServicosSection = () => {
   return (
     <section
       id="servicos"
-      className="relative min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-white via-blue-50 to-blue-100 overflow-hidden"
+      className="w-full min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-white via-blue-50 to-blue-100 overflow-hidden py-12 sm:py-16 lg:py-0"
     >
-      <div className="container mx-auto px-6 lg:px-12 flex flex-col items-center text-center">
-        <h2 className="text-5xl lg:text-6xl font-bold text-blue-700 mb-6">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-12 flex flex-col items-center text-center">
+        <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-blue-700 mb-4 sm:mb-5 lg:mb-6">
           Nossos Serviços
         </h2>
-        <p className="text-xl lg:text-2xl text-gray-600 max-w-3xl mb-12">
+        <p className="text-lg sm:text-xl lg:text-2xl text-gray-600 max-w-3xl mb-8 sm:mb-10 lg:mb-12 px-2">
           Soluções contábeis personalizadas para diferentes áreas de atuação
         </p>
 
-        <div className="w-full max-w-sm mb-14">
+        <div className="w-full max-w-sm sm:max-w-md mb-8 sm:mb-12 lg:mb-14 px-2">
           <Select value={areaSelecionada} onValueChange={setAreaSelecionada}>
-            <SelectTrigger className="w-full text-lg py-5 border-2 border-blue-200 rounded-xl focus:ring-2 focus:ring-blue-400">
+            <SelectTrigger className="w-full text-base sm:text-lg lg:text-lg py-3 sm:py-4 lg:py-5 border-2 border-blue-200 rounded-xl focus:ring-2 focus:ring-blue-400">
               <SelectValue placeholder="Escolha uma área..." />
             </SelectTrigger>
             <SelectContent>
@@ -130,16 +130,16 @@ const ServicosSection = () => {
           </Select>
         </div>
 
-        <div className="w-full max-w-5xl bg-white/70 backdrop-blur-md rounded-3xl shadow-lg p-10 md:p-14 transition-all">
-          <h3 className="text-3xl lg:text-4xl font-semibold text-blue-700 mb-8">
+        <div className="w-full max-w-4xl bg-white/70 backdrop-blur-md rounded-2xl sm:rounded-3xl shadow-lg p-6 sm:p-10 lg:p-14 transition-all mx-2 mb-8 sm:mb-12">
+          <h3 className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-blue-700 mb-6 sm:mb-8 lg:mb-8">
             Serviços para {servicoAtual.titulo}
           </h3>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6 mb-12 text-left">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 lg:gap-x-12 lg:gap-y-6 mb-8 sm:mb-12 lg:mb-12 text-left">
             {servicoAtual.beneficios.map((beneficio, index) => (
               <div
                 key={index}
-                className="flex items-start space-x-3 text-gray-800 text-lg leading-relaxed"
+                className="flex items-start space-x-3 text-gray-800 text-base sm:text-lg lg:text-lg leading-relaxed"
               >
                 <span className="text-blue-600 text-2xl mt-1 flex-shrink-0">
                   •
@@ -152,7 +152,7 @@ const ServicosSection = () => {
           <div className="text-center">
             <Button
               onClick={handleWhatsApp}
-              className="bg-green-600 hover:bg-green-700 text-white px-10 py-6 text-lg font-semibold shadow-lg transition-all rounded-2xl"
+              className="bg-green-600 hover:bg-green-700 text-white px-8 sm:px-10 lg:px-10 py-3 sm:py-4 lg:py-6 text-base sm:text-lg lg:text-lg font-semibold shadow-lg transition-all rounded-xl sm:rounded-2xl w-full sm:w-auto"
             >
               Falar no WhatsApp
             </Button>
