@@ -101,7 +101,7 @@ const ServicosSection = () => {
   return (
     <section
       id="servicos"
-      className="w-full min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-white via-blue-50 to-blue-100 overflow-hidden py-12 sm:py-16 lg:py-0"
+      className="w-full min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-white via-blue-50 to-blue-100 overflow-hidden py-14 sm:py-16 lg:py-0"
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-12 flex flex-col items-center text-center">
         <span className="inline-block text-sm sm:text-base font-semibold tracking-wide text-gold-accent uppercase mb-3">
