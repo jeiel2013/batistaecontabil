@@ -1,14 +1,15 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
 
 @theme {
   --color-blue-principal: #124978;
   --color-blue-main: #052347;
   --color-blue-claro: #4187c1;
   --color-gold-accent: #c8a24d;
-  --color-gold-soft: #e8d9b5;
-  --font-display: "Plus Jakarta Sans", "Inter", system-ui, sans-serif;
+  --color-ink: #1c1f24;
+  --color-surface-muted: #faf9f6;
+  --color-border-subtle: #e6e4df;
   --font-body: "Inter", system-ui, sans-serif;
 }
 
@@ -18,14 +19,7 @@ html {
 
 body {
   font-family: var(--font-body);
-}
-
-h1,
-h2,
-h3,
-h4,
-.font-display {
-  font-family: var(--font-display);
+  color: var(--color-ink);
 }
 
 @custom-variant dark (&:is(.dark *));
@@ -69,7 +63,7 @@ h4,
 }
 
 :root {
-  --radius: 0.625rem;
+  --radius: 0.5rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -146,7 +140,6 @@ h4,
   }
 }
 
-/* Reduced motion respected across the site */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -158,11 +151,10 @@ h4,
   }
 }
 
-/* Shared reveal-on-load animation, used sparingly on hero/section entrances */
 @keyframes fade-in-up {
   from {
     opacity: 0;
-    transform: translateY(16px);
+    transform: translateY(12px);
   }
   to {
     opacity: 1;
@@ -171,7 +163,7 @@ h4,
 }
 
 .animate-fade-in-up {
-  animation: fade-in-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: fade-in-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .delay-100 {
@@ -180,16 +172,18 @@ h4,
 .delay-200 {
   animation-delay: 0.2s;
 }
-.delay-300 {
-  animation-delay: 0.3s;
-}
 
-/* Subtle dotted texture used behind hero content, kept low-contrast on purpose */
-.bg-dot-grid {
-  background-image: radial-gradient(
-    circle,
-    rgba(18, 73, 120, 0.14) 1px,
-    transparent 1px
-  );
-  background-size: 22px 22px;
+/* Thin accent rule used under eyebrows/labels instead of filled shapes */
+.accent-rule {
+  position: relative;
+  padding-bottom: 0.75rem;
+}
+.accent-rule::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 2.5rem;
+  height: 2px;
+  background-color: var(--color-gold-accent);
 }
