@@ -1,11 +1,80 @@
 import * as React from "react";
-import { Mail, Phone, MapPin, Clock, Send } from "lucide-react";
+import { useState } from "react";
+import { Mail, Phone, MapPin, Clock, Send, CheckCircle2 } from "lucide-react";
 import { Card, CardContent } from "./ui/card";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import { Button } from "./ui/button";
 
+const CONTACT_INFO = [
+  {
+    icon: Phone,
+    title: "Telefone",
+    lines: ["(11) 1234-5678", "(11) 98765-4321"],
+  },
+  {
+    icon: Mail,
+    title: "E-mail",
+    lines: ["contato@empresa.com.br", "suporte@empresa.com.br"],
+  },
+  {
+    icon: MapPin,
+    title: "Endereço",
+    lines: ["Rua Exemplo, 123 - Centro", "São Paulo - SP, 01234-567"],
+  },
+  {
+    icon: Clock,
+    title: "Horário de Atendimento",
+    lines: ["Segunda a Sexta: 8h às 18h", "Sábado: 8h às 12h"],
+  },
+];
+
+type FormState = {
+  nome: string;
+  email: string;
+  telefone: string;
+  mensagem: string;
+};
+
+const INITIAL_FORM: FormState = {
+  nome: "",
+  email: "",
+  telefone: "",
+  mensagem: "",
+};
+
 const ContatoSection: React.FC = () => {
+  const [form, setForm] = useState<FormState>(INITIAL_FORM);
+  const [sent, setSent] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleChange =
+    (field: keyof FormState) =>
+    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      setForm((prev) => ({ ...prev, [field]: e.target.value }));
+    };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setError(null);
+
+    if (!form.nome.trim() || !form.email.trim() || !form.mensagem.trim()) {
+      setError("Preencha nome, e-mail e mensagem para continuar.");
+      return;
+    }
+
+    const telefone = "5531999999999";
+    const mensagem = `Olá! Meu nome é ${form.nome}.%0AE-mail: ${form.email}%0ATelefone: ${form.telefone || "não informado"}%0A%0A${form.mensagem}`;
+    window.open(
+      `https://wa.me/${telefone}?text=${encodeURIComponent(mensagem)}`,
+      "_blank",
+      "noopener,noreferrer"
+    );
+
+    setSent(true);
+    setForm(INITIAL_FORM);
+  };
+
   return (
     <section
       id="contato"
@@ -13,7 +82,10 @@ const ContatoSection: React.FC = () => {
     >
       <div className="container mx-auto px-6 lg:px-12">
         <div className="text-center mb-12">
-          <h2 className="text-5xl lg:text-6xl font-extrabold text-white mb-4">
+          <span className="inline-block text-sm sm:text-base font-semibold tracking-wide text-gold-accent uppercase mb-3">
+            Fale com a gente
+          </span>
+          <h2 className="font-display text-5xl lg:text-6xl font-extrabold text-white mb-4">
             Entre em Contato
           </h2>
           <p className="text-xl text-blue-claro max-w-2xl mx-auto">
@@ -24,85 +96,53 @@ const ContatoSection: React.FC = () => {
         <div className="grid md:grid-cols-2 gap-8 lg:gap-12 max-w-6xl mx-auto items-stretch">
           {/* Informações de Contato */}
           <div className="space-y-4 flex flex-col">
-            <Card className="bg-white/10 border-white/20 backdrop-blur-sm hover:bg-white/15 transition-all duration-300">
-              <CardContent className="flex items-start gap-3 p-4">
-                <div className="bg-blue-claro p-2 rounded-lg">
-                  <Phone className="w-5 h-5 text-white" />
-                </div>
-                <div>
-                  <h4 className="text-white font-semibold text-base mb-1">
-                    Telefone
-                  </h4>
-                  <p className="text-blue-claro text-sm">(11) 1234-5678</p>
-                  <p className="text-blue-claro text-sm">(11) 98765-4321</p>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-white/10 border-white/20 backdrop-blur-sm hover:bg-white/15 transition-all duration-300">
-              <CardContent className="flex items-start gap-3 p-4">
-                <div className="bg-blue-claro p-2 rounded-lg">
-                  <Mail className="w-5 h-5 text-white" />
-                </div>
-                <div>
-                  <h4 className="text-white font-semibold text-base mb-1">
-                    E-mail
-                  </h4>
-                  <p className="text-blue-claro text-sm">
-                    contato@empresa.com.br
-                  </p>
-                  <p className="text-blue-claro text-sm">
-                    suporte@empresa.com.br
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-white/10 border-white/20 backdrop-blur-sm hover:bg-white/15 transition-all duration-300">
-              <CardContent className="flex items-start gap-3 p-4">
-                <div className="bg-blue-claro p-2 rounded-lg">
-                  <MapPin className="w-5 h-5 text-white" />
-                </div>
-                <div>
-                  <h4 className="text-white font-semibold text-base mb-1">
-                    Endereço
-                  </h4>
-                  <p className="text-blue-claro text-sm">
-                    Rua Exemplo, 123 - Centro
-                  </p>
-                  <p className="text-blue-claro text-sm">
-                    São Paulo - SP, 01234-567
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-white/10 border-white/20 backdrop-blur-sm hover:bg-white/15 transition-all duration-300">
-              <CardContent className="flex items-start gap-3 p-4">
-                <div className="bg-blue-claro p-2 rounded-lg">
-                  <Clock className="w-5 h-5 text-white" />
-                </div>
-                <div>
-                  <h4 className="text-white font-semibold text-base mb-1">
-                    Horário de Atendimento
-                  </h4>
-                  <p className="text-blue-claro text-sm">
-                    Segunda a Sexta: 8h às 18h
-                  </p>
-                  <p className="text-blue-claro text-sm">Sábado: 8h às 12h</p>
-                </div>
-              </CardContent>
-            </Card>
+            {CONTACT_INFO.map(({ icon: Icon, title, lines }) => (
+              <Card
+                key={title}
+                className="bg-white/10 border-white/20 backdrop-blur-sm hover:bg-white/15 transition-all duration-300"
+              >
+                <CardContent className="flex items-start gap-3 p-4">
+                  <div className="bg-gold-accent p-2 rounded-lg">
+                    <Icon className="w-5 h-5 text-blue-main" />
+                  </div>
+                  <div>
+                    <h4 className="text-white font-semibold text-base mb-1">
+                      {title}
+                    </h4>
+                    {lines.map((line) => (
+                      <p key={line} className="text-blue-claro text-sm">
+                        {line}
+                      </p>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
           </div>
 
           {/* Formulário de Contato */}
           <div className="flex flex-col h-full">
             <Card className="bg-white border-none shadow-xl flex flex-col h-full">
               <CardContent className="p-8 flex flex-col flex-1">
-                <h3 className="text-3xl font-bold text-blue-main mb-6">
+                <h3 className="text-3xl font-semibold text-blue-main mb-6">
                   Envie uma Mensagem
                 </h3>
-                <form className="space-y-5 flex flex-col flex-1">
+
+                {sent && (
+                  <div className="flex items-center gap-2 text-green-700 bg-green-50 border border-green-200 rounded-lg px-4 py-3 mb-5 text-sm">
+                    <CheckCircle2 className="w-5 h-5 shrink-0" />
+                    <span>
+                      Mensagem pronta! Continue o envio pelo WhatsApp que
+                      abrimos para você.
+                    </span>
+                  </div>
+                )}
+
+                <form
+                  className="space-y-5 flex flex-col flex-1"
+                  onSubmit={handleSubmit}
+                  noValidate
+                >
                   <div>
                     <label
                       htmlFor="nome"
@@ -115,6 +155,10 @@ const ContatoSection: React.FC = () => {
                       type="text"
                       placeholder="Seu nome"
                       className="w-full"
+                      value={form.nome}
+                      onChange={handleChange("nome")}
+                      autoComplete="name"
+                      required
                     />
                   </div>
 
@@ -130,6 +174,10 @@ const ContatoSection: React.FC = () => {
                       type="email"
                       placeholder="seu@email.com"
                       className="w-full"
+                      value={form.email}
+                      onChange={handleChange("email")}
+                      autoComplete="email"
+                      required
                     />
                   </div>
 
@@ -145,6 +193,9 @@ const ContatoSection: React.FC = () => {
                       type="tel"
                       placeholder="(00) 00000-0000"
                       className="w-full"
+                      value={form.telefone}
+                      onChange={handleChange("telefone")}
+                      autoComplete="tel"
                     />
                   </div>
 
@@ -159,8 +210,17 @@ const ContatoSection: React.FC = () => {
                       id="mensagem"
                       placeholder="Como podemos ajudar?"
                       className="w-full resize-none flex-1"
+                      value={form.mensagem}
+                      onChange={handleChange("mensagem")}
+                      required
                     />
                   </div>
+
+                  {error && (
+                    <p className="text-sm text-destructive" role="alert">
+                      {error}
+                    </p>
+                  )}
 
                   <Button
                     type="submit"
