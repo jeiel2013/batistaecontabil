@@ -17,7 +17,7 @@ const FooterSection: React.FC = () => {
   return (
     <footer className="w-full bg-blue-900/95">
       <div className="container mx-auto px-6 lg:px-12 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mb-8">
           {/* Coluna 1 - Logo e Descrição */}
           <div className="flex flex-col space-y-4">
             <img
