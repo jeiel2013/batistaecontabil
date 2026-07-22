@@ -1,14 +1,31 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap");
 
 @theme {
   --color-blue-principal: #124978;
   --color-blue-main: #052347;
   --color-blue-claro: #4187c1;
+  --color-gold-accent: #c8a24d;
+  --color-gold-soft: #e8d9b5;
+  --font-display: "Plus Jakarta Sans", "Inter", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
 }
 
 html {
   scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+}
+
+h1,
+h2,
+h3,
+h4,
+.font-display {
+  font-family: var(--font-display);
 }
 
 @custom-variant dark (&:is(.dark *));
@@ -127,4 +144,52 @@ html {
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Reduced motion respected across the site */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Shared reveal-on-load animation, used sparingly on hero/section entrances */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.delay-100 {
+  animation-delay: 0.1s;
+}
+.delay-200 {
+  animation-delay: 0.2s;
+}
+.delay-300 {
+  animation-delay: 0.3s;
+}
+
+/* Subtle dotted texture used behind hero content, kept low-contrast on purpose */
+.bg-dot-grid {
+  background-image: radial-gradient(
+    circle,
+    rgba(18, 73, 120, 0.14) 1px,
+    transparent 1px
+  );
+  background-size: 22px 22px;
 }
