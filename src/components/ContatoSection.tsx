@@ -43,6 +43,9 @@ const INITIAL_FORM: FormState = {
   mensagem: "",
 };
 
+const FIELD_LABEL_CLASS =
+  "block text-xs font-semibold uppercase tracking-wide text-gray-500 mb-2";
+
 const ContatoSection: React.FC = () => {
   const [form, setForm] = useState<FormState>(INITIAL_FORM);
   const [sent, setSent] = useState(false);
@@ -78,17 +81,17 @@ const ContatoSection: React.FC = () => {
   return (
     <section
       id="contato"
-      className="min-h-screen bg-blue-main flex items-center py-20 scroll-mt-16"
+      className="min-h-screen bg-blue-main flex items-center py-16 sm:py-20 scroll-mt-16"
     >
       <div className="container mx-auto px-6 lg:px-12">
         <div className="text-center mb-12">
           <span className="inline-block text-sm sm:text-base font-semibold tracking-wide text-gold-accent uppercase mb-3">
             Fale com a gente
           </span>
-          <h2 className="font-display text-5xl lg:text-6xl font-extrabold text-white mb-4">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white mb-4 tracking-tight">
             Entre em Contato
           </h2>
-          <p className="text-xl text-blue-claro max-w-2xl mx-auto">
+          <p className="text-lg sm:text-xl text-blue-claro max-w-2xl mx-auto">
             Estamos prontos para ajudar sua empresa a crescer. Fale conosco!
           </p>
         </div>
@@ -101,16 +104,23 @@ const ContatoSection: React.FC = () => {
                 key={title}
                 className="bg-white/10 border-white/20 backdrop-blur-sm hover:bg-white/15 transition-all duration-300"
               >
-                <CardContent className="flex items-start gap-3 p-4">
-                  <div className="bg-gold-accent p-2 rounded-lg">
+                <CardContent className="flex items-start gap-3 p-4 sm:p-5">
+                  <div className="bg-gold-accent p-2 rounded-lg shrink-0">
                     <Icon className="w-5 h-5 text-blue-main" />
                   </div>
-                  <div>
-                    <h4 className="text-white font-semibold text-base mb-1">
+                  <div className="min-w-0">
+                    <span className="block text-xs font-semibold uppercase tracking-wide text-gold-accent mb-1">
                       {title}
-                    </h4>
-                    {lines.map((line) => (
-                      <p key={line} className="text-blue-claro text-sm">
+                    </span>
+                    {lines.map((line, i) => (
+                      <p
+                        key={line}
+                        className={
+                          i === 0
+                            ? "text-white font-medium text-sm sm:text-base break-words"
+                            : "text-blue-claro text-sm break-words"
+                        }
+                      >
                         {line}
                       </p>
                     ))}
@@ -123,10 +133,13 @@ const ContatoSection: React.FC = () => {
           {/* Formulário de Contato */}
           <div className="flex flex-col h-full">
             <Card className="bg-white border-none shadow-xl flex flex-col h-full">
-              <CardContent className="p-8 flex flex-col flex-1">
-                <h3 className="text-3xl font-semibold text-blue-main mb-6">
+              <CardContent className="p-6 sm:p-8 flex flex-col flex-1">
+                <h3 className="text-2xl sm:text-3xl font-semibold text-blue-main mb-1 tracking-tight">
                   Envie uma Mensagem
                 </h3>
+                <p className="text-sm text-gray-500 mb-6">
+                  Respondemos pelo WhatsApp em horário comercial.
+                </p>
 
                 {sent && (
                   <div className="flex items-center gap-2 text-green-700 bg-green-50 border border-green-200 rounded-lg px-4 py-3 mb-5 text-sm">
@@ -144,10 +157,7 @@ const ContatoSection: React.FC = () => {
                   noValidate
                 >
                   <div>
-                    <label
-                      htmlFor="nome"
-                      className="block text-sm font-medium text-gray-700 mb-2"
-                    >
+                    <label htmlFor="nome" className={FIELD_LABEL_CLASS}>
                       Nome Completo
                     </label>
                     <Input
@@ -163,10 +173,7 @@ const ContatoSection: React.FC = () => {
                   </div>
 
                   <div>
-                    <label
-                      htmlFor="email"
-                      className="block text-sm font-medium text-gray-700 mb-2"
-                    >
+                    <label htmlFor="email" className={FIELD_LABEL_CLASS}>
                       E-mail
                     </label>
                     <Input
@@ -182,10 +189,7 @@ const ContatoSection: React.FC = () => {
                   </div>
 
                   <div>
-                    <label
-                      htmlFor="telefone"
-                      className="block text-sm font-medium text-gray-700 mb-2"
-                    >
+                    <label htmlFor="telefone" className={FIELD_LABEL_CLASS}>
                       Telefone
                     </label>
                     <Input
@@ -200,10 +204,7 @@ const ContatoSection: React.FC = () => {
                   </div>
 
                   <div className="flex-1 flex flex-col">
-                    <label
-                      htmlFor="mensagem"
-                      className="block text-sm font-medium text-gray-700 mb-2"
-                    >
+                    <label htmlFor="mensagem" className={FIELD_LABEL_CLASS}>
                       Mensagem
                     </label>
                     <Textarea
