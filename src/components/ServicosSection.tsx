@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { CircleCheckBig, MessageCircle } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -92,7 +93,7 @@ const ServicosSection = () => {
     const url = `https://wa.me/${telefone}?text=${encodeURIComponent(
       mensagem
     )}`;
-    window.open(url, "_blank");
+    window.open(url, "_blank", "noopener,noreferrer");
   };
 
   const servicoAtual = servicosData[areaSelecionada];
@@ -103,7 +104,10 @@ const ServicosSection = () => {
       className="w-full min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-white via-blue-50 to-blue-100 overflow-hidden py-12 sm:py-16 lg:py-0"
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-12 flex flex-col items-center text-center">
-        <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-blue-700 mb-4 sm:mb-5 lg:mb-6">
+        <span className="inline-block text-sm sm:text-base font-semibold tracking-wide text-gold-accent uppercase mb-3">
+          O que fazemos por você
+        </span>
+        <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-blue-principal mb-4 sm:mb-5 lg:mb-6">
           Nossos Serviços
         </h2>
         <p className="text-lg sm:text-xl lg:text-2xl text-gray-600 max-w-3xl mb-8 sm:mb-10 lg:mb-12 px-2">
@@ -112,7 +116,7 @@ const ServicosSection = () => {
 
         <div className="w-full max-w-sm sm:max-w-md mb-8 sm:mb-12 lg:mb-14 px-2">
           <Select value={areaSelecionada} onValueChange={setAreaSelecionada}>
-            <SelectTrigger className="w-full text-base sm:text-lg lg:text-lg py-3 sm:py-4 lg:py-5 border-2 border-blue-200 rounded-xl focus:ring-2 focus:ring-blue-400">
+            <SelectTrigger className="w-full text-base sm:text-lg lg:text-lg py-3 sm:py-4 lg:py-5 border-2 border-blue-200 rounded-xl focus:ring-2 focus:ring-blue-claro bg-white shadow-sm">
               <SelectValue placeholder="Escolha uma área..." />
             </SelectTrigger>
             <SelectContent>
@@ -130,19 +134,22 @@ const ServicosSection = () => {
           </Select>
         </div>
 
-        <div className="w-full max-w-4xl bg-white/70 backdrop-blur-md rounded-2xl sm:rounded-3xl shadow-lg p-6 sm:p-10 lg:p-14 transition-all mx-2 mb-8 sm:mb-12">
-          <h3 className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-blue-700 mb-6 sm:mb-8 lg:mb-8">
+        <div
+          key={areaSelecionada}
+          className="w-full max-w-4xl bg-white/80 backdrop-blur-md rounded-2xl sm:rounded-3xl shadow-xl p-6 sm:p-10 lg:p-14 transition-all mx-2 mb-8 sm:mb-12 animate-fade-in-up"
+        >
+          <h3 className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-blue-principal mb-6 sm:mb-8 lg:mb-8">
             Serviços para {servicoAtual.titulo}
           </h3>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 lg:gap-x-12 lg:gap-y-6 mb-8 sm:mb-12 lg:mb-12 text-left">
-            {servicoAtual.beneficios.map((beneficio, index) => (
+            {servicoAtual.beneficios.map((beneficio) => (
               <div
-                key={index}
+                key={beneficio}
                 className="flex items-start space-x-3 text-gray-800 text-base sm:text-lg lg:text-lg leading-relaxed"
               >
-                <span className="text-blue-600 text-2xl mt-1 flex-shrink-0">
-                  •
+                <span className="text-blue-claro mt-0.5 shrink-0">
+                  <CircleCheckBig className="w-5 h-5" />
                 </span>
                 <span>{beneficio}</span>
               </div>
@@ -152,8 +159,9 @@ const ServicosSection = () => {
           <div className="text-center">
             <Button
               onClick={handleWhatsApp}
-              className="bg-green-600 hover:bg-green-700 text-white px-8 sm:px-10 lg:px-10 py-3 sm:py-4 lg:py-6 text-base sm:text-lg lg:text-lg font-semibold shadow-lg transition-all rounded-xl sm:rounded-2xl w-full sm:w-auto"
+              className="bg-green-600 hover:bg-green-700 text-white px-8 sm:px-10 lg:px-10 py-3 sm:py-4 lg:py-6 text-base sm:text-lg lg:text-lg font-semibold shadow-lg hover:shadow-xl transition-all rounded-xl sm:rounded-2xl w-full sm:w-auto"
             >
+              <MessageCircle className="w-5 h-5 mr-2" />
               Falar no WhatsApp
             </Button>
           </div>
