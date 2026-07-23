@@ -1,28 +1,29 @@
 import { lazy, Suspense } from "react";
-import Header from "./components/Header";
-import HomeSection from "./components/HomeSection";
+import { Routes, Route } from "react-router-dom";
+import Layout from "./components/Layout";
+import HomePage from "./pages/HomePage";
 
-// Below-the-fold sections are code-split so the initial bundle only
-// pays for what's visible above the fold on first paint.
-const SobreSection = lazy(() => import("./components/SobreSection"));
-const ServicosSection = lazy(() => import("./components/ServicosSection"));
-const ContatoSection = lazy(() => import("./components/ContatoSection"));
-const FooterSection = lazy(() => import("./components/FooterSection"));
+// Páginas fora da Home são carregadas sob demanda
+const SobrePage = lazy(() => import("./pages/SobrePage"));
+const ServicosPage = lazy(() => import("./pages/ServicosPage"));
+const ContatoPage = lazy(() => import("./pages/ContatoPage"));
+const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
+
+function withSuspense(element: React.ReactNode) {
+  return <Suspense fallback={null}>{element}</Suspense>;
+}
 
 function App() {
   return (
-    <>
-      <Header />
-      <main className="pt-20 scroll-smooth">
-        <HomeSection />
-        <Suspense fallback={null}>
-          <SobreSection />
-          <ServicosSection />
-          <ContatoSection />
-          <FooterSection />
-        </Suspense>
-      </main>
-    </>
+    <Routes>
+      <Route element={<Layout />}>
+        <Route index element={<HomePage />} />
+        <Route path="sobre" element={withSuspense(<SobrePage />)} />
+        <Route path="servicos" element={withSuspense(<ServicosPage />)} />
+        <Route path="contato" element={withSuspense(<ContatoPage />)} />
+        <Route path="*" element={withSuspense(<NotFoundPage />)} />
+      </Route>
+    </Routes>
   );
 }
 
