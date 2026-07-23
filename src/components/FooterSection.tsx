@@ -45,7 +45,7 @@ const FooterSection: React.FC = () => {
                     to={to}
                     end={end}
                     className={({ isActive }) =>
-                      `transition-colors duration-200 ${
+                      `transition-colors duration-300 ease-fluid ${
                         isActive
                           ? "text-white font-medium"
                           : "text-white/70 hover:text-white"
@@ -79,7 +79,7 @@ const FooterSection: React.FC = () => {
               <div className="flex items-center space-x-2">
                 <InstagramIcon className="w-4 h-4 text-gold-accent shrink-0" />
                 <a
-                  className="text-white text-sm hover:text-gold-accent transition-colors duration-200"
+                  className="text-white hover:text-gold-accent transition-colors duration-300 ease-fluid"
                   href="https://www.instagram.com/contabilidade.batistaoficial/"
                   target="_blank"
                   rel="noopener noreferrer"

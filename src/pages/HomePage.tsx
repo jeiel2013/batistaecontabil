@@ -129,7 +129,7 @@ const HomePage: React.FC = () => {
               </p>
               <Link
                 to="/sobre"
-                className="inline-flex items-center gap-1.5 text-white font-semibold hover:text-gold-accent transition-colors"
+                className="inline-flex items-center gap-1.5 text-blue-main font-semibold hover:text-blue-principal transition-colors duration-300 ease-fluid"
               >
                 Conheça nossa história
                 <ArrowRight className="w-4 h-4" />
@@ -169,7 +169,7 @@ const HomePage: React.FC = () => {
             {SERVICE_PREVIEW.map(({ label, description }) => (
               <div
                 key={label}
-                className="border border-border-subtle rounded-lg py-6 px-5 hover:border-blue-claro transition-colors"
+                className="border border-border-subtle rounded-lg py-6 px-5 hover:border-blue-claro transition-smooth"
               >
                 <span className="font-semibold text-blue-main block mb-1.5">
                   {label}

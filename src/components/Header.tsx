@@ -28,7 +28,7 @@ const Header: React.FC = () => {
   }, [isMenuOpen]);
 
   const navLinkClass = ({ isActive }: { isActive: boolean }) =>
-    `relative transition duration-200 after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:bg-gold-accent after:transition-all after:duration-300 ${
+    `relative transition-colors duration-300 ease-fluid after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:bg-gold-accent after:transition-[width] after:duration-300 after:ease-fluid ${
       isActive
         ? "text-white font-semibold after:w-full"
         : "text-white/80 hover:text-white after:w-0 hover:after:w-full"
