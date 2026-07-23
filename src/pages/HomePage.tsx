@@ -191,7 +191,7 @@ const HomePage: React.FC = () => {
       </section>
 
       {/* 4. CTA final — azul */}
-      <section className="py-16 sm:py-20 bg-blue-main text-center">
+      <section className="py-16 sm:py-20 bg-blue-principal text-center">
         <div className="container mx-auto px-6 lg:px-12">
           <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight mb-4">
             Vamos conversar sobre sua empresa?
