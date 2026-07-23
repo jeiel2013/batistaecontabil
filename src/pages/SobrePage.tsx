@@ -13,7 +13,8 @@ import {
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 import { Card, CardContent } from "@/components/ui/card";
-import { ImagePlaceholder } from "@/components/ui/image-placeholder";
+import equipeFoto from "@/assets/sobre/equipe.jpg";
+import escritorioFoto from "@/assets/sobre/escritorio.jpg";
 
 const VALUES = [
   {
@@ -69,11 +70,29 @@ const SobrePage: React.FC = () => {
             </p>
           </div>
           <div className="order-1 md:order-2">
-            <ImagePlaceholder
-              ratio="aspect-[4/5]"
-              label="Foto da equipe ou do escritório"
+            <img
+              src={equipeFoto}
+              alt="Equipe da Batista E-Contábil em atendimento"
+              width={480}
+              height={600}
+              loading="lazy"
+              className="w-full h-auto aspect-[4/5] object-cover rounded-lg border border-border-subtle"
             />
           </div>
+        </div>
+      </section>
+
+      {/* Foto do escritório/ambiente */}
+      <section className="pb-16 sm:pb-20">
+        <div className="container mx-auto px-6 lg:px-12">
+          <img
+            src={escritorioFoto}
+            alt="Ambiente de trabalho da Batista E-Contábil"
+            width={1200}
+            height={500}
+            loading="lazy"
+            className="w-full h-auto aspect-[21/9] object-cover rounded-lg border border-border-subtle"
+          />
         </div>
       </section>
 
