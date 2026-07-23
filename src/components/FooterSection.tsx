@@ -16,7 +16,7 @@ const FooterSection: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="w-full bg-blue-main border-t border-gold-accent/50">
+    <footer className="w-full bg-blue-main border-t border-gold-accent/60">
       <div className="container mx-auto px-6 lg:px-12 py-12">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mb-8">
           <div className="flex flex-col space-y-4">
