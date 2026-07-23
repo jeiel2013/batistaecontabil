@@ -30,14 +30,14 @@ const Header: React.FC = () => {
   const navLinkClass = ({ isActive }: { isActive: boolean }) =>
     `relative transition duration-200 after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:bg-gold-accent after:transition-all after:duration-300 ${
       isActive
-        ? "text-white after:w-full"
+        ? "text-white font-semibold after:w-full"
         : "text-white/80 hover:text-white after:w-0 hover:after:w-full"
     }`;
 
   return (
     <header
-      className={`fixed top-0 left-0 w-full z-50 bg-blue-main transition-shadow duration-300 ${
-        isScrolled || isMenuOpen ? "shadow-md" : ""
+      className={`fixed top-0 left-0 w-full z-50 bg-blue-main border-b transition-colors duration-300 ${
+        +isScrolled || isMenuOpen ? "border-white/10" : "border-transparent"
       }`}
     >
       <div className="container mx-auto flex justify-between items-center px-6 py-4 lg:px-10 lg:py-5">
