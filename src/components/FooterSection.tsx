@@ -1,22 +1,22 @@
 import { Mail, Phone, MapPin, InstagramIcon } from "lucide-react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "./ui/hover-card";
 import { Button } from "./ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import batistaecontabil from "../assets/batistaecontabil.svg";
 
 const QUICK_LINKS = [
-  { to: "/", label: "Início" },
-  { to: "/sobre", label: "Sobre Nós" },
-  { to: "/servicos", label: "Serviços" },
-  { to: "/contato", label: "Contato" },
+  { to: "/", label: "Início", end: true },
+  { to: "/sobre", label: "Sobre Nós", end: false },
+  { to: "/servicos", label: "Serviços", end: false },
+  { to: "/contato", label: "Contato", end: false },
 ];
 
 const FooterSection: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="w-full bg-blue-900/95">
+    <footer className="w-full bg-blue-main">
       <div className="container mx-auto px-6 lg:px-12 py-12">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mb-8">
           <div className="flex flex-col space-y-4">
@@ -28,47 +28,58 @@ const FooterSection: React.FC = () => {
               height={45}
               className="h-auto w-auto max-w-[160px]"
             />
-            <p className="text-white/80 text-sm leading-relaxed">
+            <p className="text-white text-sm leading-relaxed">
               Soluções contábeis personalizadas para sua empresa crescer com
               segurança e conformidade.
             </p>
           </div>
 
           <div className="flex flex-col space-y-4">
-            <h3 className="text-lg font-semibold text-white">Links Rápidos</h3>
+            <span className="text-xs font-semibold uppercase tracking-wide text-gold-accent">
+              Links Rápidos
+            </span>
             <ul className="space-y-2">
-              {QUICK_LINKS.map(({ to, label }) => (
+              {QUICK_LINKS.map(({ to, label, end }) => (
                 <li key={to}>
-                  <Link
+                  <NavLink
                     to={to}
-                    className="text-white/80 hover:text-gold-accent transition-colors duration-200"
+                    end={end}
+                    className={({ isActive }) =>
+                      `transition-colors duration-200 ${
+                        isActive
+                          ? "text-white font-medium"
+                          : "text-white/70 hover:text-white"
+                      }`
+                    }
                   >
                     {label}
-                  </Link>
+                  </NavLink>
                 </li>
               ))}
             </ul>
           </div>
 
           <div className="flex flex-col space-y-4">
-            <h3 className="text-lg font-semibold text-white">Contato</h3>
+            <span className="text-xs font-semibold uppercase tracking-wide text-gold-accent">
+              Contato
+            </span>
             <div className="space-y-3">
               <div className="flex items-center space-x-2">
-                <Phone className="w-4 h-4 text-gold-accent" />
-                <span className="text-white/80 text-sm">(11) 1234-5678</span>
+                <Phone className="w-4 h-4 text-gold-accent shrink-0" />
+                <span className="text-white text-sm">(11) 1234-5678</span>
               </div>
               <div className="flex items-center space-x-2">
-                <Mail className="w-4 h-4 text-gold-accent" />
-                <span className="text-white/80 text-sm">contato@empresa.com.br</span>
+                <Mail className="w-4 h-4 text-gold-accent shrink-0" />
+                <span className="text-white text-sm">contato@empresa.com.br</span>
               </div>
               <div className="flex items-center space-x-2">
-                <MapPin className="w-4 h-4 text-gold-accent" />
-                <span className="text-white/80 text-sm">São Paulo - SP</span>
+                <MapPin className="w-4 h-4 text-gold-accent shrink-0" />
+                <span className="text-white text-sm">São Paulo - SP</span>
               </div>
               <div className="flex items-center space-x-2">
-                <InstagramIcon className="w-4 h-4 text-gold-accent" />
+                <InstagramIcon className="w-4 h-4 text-gold-accent shrink-0" />
                 <a
-                  className="text-white/80 text-sm hover:text-gold-accent transition-colors duration-200"
+                  className="text-white text-sm hover:text-gold-accent transition-colors duration-200"
                   href="https://www.instagram.com/contabilidade.batistaoficial/"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -83,10 +94,10 @@ const FooterSection: React.FC = () => {
         <div className="border-t border-white/10 my-8" />
 
         <div className="flex flex-col md:flex-row justify-between items-center text-center md:text-left">
-          <p className="text-white/80 text-sm">
+          <p className="text-white text-sm">
             &copy; {currentYear} Batista E-Contábil. Todos os direitos reservados.
           </p>
-          <p className="text-white/80 text-sm mt-4 md:mt-0">
+          <p className="text-white/70 text-sm mt-4 md:mt-0">
             Desenvolvido por{" "}
             <HoverCard>
               <HoverCardTrigger asChild>
@@ -103,7 +114,7 @@ const FooterSection: React.FC = () => {
                   <div className="space-y-1">
                     <h4 className="text-sm font-semibold">@jeiel2013</h4>
                     <p className="text-sm">
-                      Desenvolvedor Full-Stack - Instagram: @jeiel2013
+                      Desenvolvedor Full-Stack Freelancer
                     </p>
                   </div>
                 </div>
