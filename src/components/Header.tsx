@@ -28,10 +28,8 @@ const Header: React.FC = () => {
   }, [isMenuOpen]);
 
   const navLinkClass = ({ isActive }: { isActive: boolean }) =>
-    `relative transition-colors duration-300 ease-fluid after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-full after:bg-gold-accent after:origin-left after:transition-transform after:duration-300 after:ease-fluid ${
-      isActive
-        ? "text-white font-semibold after:scale-x-100"
-        : "text-white/80 hover:text-white after:scale-x-0 hover:after:scale-x-100"
+    `group relative inline-block py-1 transition-colors duration-300 ease-fluid ${
+      isActive ? "text-white font-semibold" : "text-white/80 hover:text-white"
     }`;
 
   return (
@@ -60,7 +58,18 @@ const Header: React.FC = () => {
             {NAV_ITEMS.map(({ to, label, end }) => (
               <li key={to}>
                 <NavLink to={to} end={end} className={navLinkClass}>
-                  {label}
+                  {({ isActive }) => (
+                    <>
+                      {label}
+                      <span
+                        className={`absolute -bottom-1 left-0 h-[2px] w-full bg-gold-accent origin-left transition-transform duration-300 ease-fluid ${
+                          isActive
+                            ? "scale-x-100"
+                            : "scale-x-0 group-hover:scale-x-100"
+                        }`}
+                      />
+                    </>
+                  )}
                 </NavLink>
               </li>
             ))}
