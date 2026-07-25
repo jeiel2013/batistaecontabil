@@ -141,12 +141,12 @@ const SobrePage: React.FC = () => {
               {VALUES.map(({ icon: Icon, title, description }) => (
                 <CarouselItem
                   key={title}
-                  className="pl-4 sm:pl-6 basis-[85%] sm:basis-1/2 lg:basis-1/3"
+                  className="pl-4 sm:pl-6 basis-[85%] sm:basis-1/2 lg:basis-1/2 xl:basis-2/5"
                 >
                   <Card className="h-full select-none">
-                    <CardContent className="flex flex-col gap-4 p-8 h-full">
-                      <Icon className="w-9 h-9 text-blue-claro" />
-                      <h3 className="text-2xl font-semibold text-blue-main">
+                    <CardContent className="flex flex-col gap-4 p-8 lg:p-10 h-full lg:min-h-[220px] lg:justify-center">
+                      <Icon className="w-9 h-9 lg:w-10 lg:h-10 text-blue-claro" />
+                      <h3 className="text-2xl lg:text-3xl font-semibold text-blue-main">
                         {title}
                       </h3>
                       <p className="text-ink/70 text-lg leading-relaxed">
