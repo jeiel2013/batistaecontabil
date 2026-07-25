@@ -1,3 +1,4 @@
+import * as React from "react";
 import { Link } from "react-router-dom";
 import {
   CircleCheckBig,
@@ -8,6 +9,12 @@ import {
   Phone,
   Mail,
 } from "lucide-react";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
 import equipeFoto from "@/assets/sobre/equipe.jpg";
 
 // TODO: troque pelas fotos reais e pelos nomes/cargos dos sócios
@@ -68,6 +75,10 @@ const SERVICE_PREVIEW = [
 ];
 
 const HomePage: React.FC = () => {
+  const autoplayPlugin = React.useRef(
+    Autoplay({ delay: 2800, stopOnInteraction: false }),
+  );
+
   return (
     <>
       {/* 1. Hero — branco */}
@@ -106,29 +117,40 @@ const HomePage: React.FC = () => {
             </Link>
           </div>
 
-          {/* Carrossel contínuo dos sócios */}
-          <div className="flex-1 w-full max-w-md md:max-w-lg overflow-hidden">
-            <div className="flex w-max animate-marquee">
-              {[...LIDERANCA, ...LIDERANCA].map((pessoa, i) => (
-                <div
-                  key={`${pessoa.name}-${i}`}
-                  className="w-40 sm:w-48 mx-3 shrink-0 text-center"
-                >
-                  <img
-                    src={pessoa.photo}
-                    alt={`${pessoa.name}, ${pessoa.role}`}
-                    width={192}
-                    height={240}
-                    loading="lazy"
-                    className="w-full aspect-[4/5] object-cover rounded-lg border border-border-subtle mb-3"
-                  />
-                  <p className="font-semibold text-blue-main text-sm">
-                    {pessoa.name}
-                  </p>
-                  <p className="text-muted-foreground text-xs">{pessoa.role}</p>
-                </div>
-              ))}
-            </div>
+          {/* Carrossel dos sócios — arrastável, autoplay contínuo, fotos grandes */}
+          <div className="flex-1 w-full max-w-xl lg:max-w-2xl">
+            <Carousel
+              opts={{ loop: true, align: "center" }}
+              plugins={[autoplayPlugin.current]}
+              className="w-full cursor-grab active:cursor-grabbing"
+            >
+              <CarouselContent className="-ml-4 sm:-ml-6">
+                {LIDERANCA.map((pessoa) => (
+                  <CarouselItem
+                    key={pessoa.name}
+                    className="pl-4 sm:pl-6 basis-4/5 sm:basis-1/2"
+                  >
+                    <div className="text-center select-none">
+                      <img
+                        src={pessoa.photo}
+                        alt={`${pessoa.name}, ${pessoa.role}`}
+                        width={340}
+                        height={425}
+                        loading="lazy"
+                        draggable={false}
+                        className="w-full aspect-[4/5] object-cover rounded-lg border border-border-subtle mb-4"
+                      />
+                      <p className="font-semibold text-blue-main text-base sm:text-lg">
+                        {pessoa.name}
+                      </p>
+                      <p className="text-muted-foreground text-sm">
+                        {pessoa.role}
+                      </p>
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+            </Carousel>
           </div>
         </div>
       </section>
