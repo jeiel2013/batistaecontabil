@@ -150,15 +150,15 @@ const ServicosPage: React.FC = () => {
       {/* Diferenciais */}
       <section className="pb-16 sm:pb-20 border-b border-border-subtle">
         <div className="container mx-auto px-4 sm:px-6 lg:px-12">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-8">
             {DIFERENCIAIS.map(({ icon: Icon, title, description }) => (
               <div
                 key={title}
-                className="border border-border-subtle rounded-lg p-6 hover:border-blue-claro transition-colors"
+                className="border border-border-subtle rounded-lg p-8 hover:border-blue-claro transition-smooth"
               >
-                <Icon className="w-6 h-6 text-blue-claro mb-3" />
-                <h3 className="font-semibold text-blue-main mb-1">{title}</h3>
-                <p className="text-sm text-ink/60 leading-relaxed">
+                <Icon className="w-8 h-8 text-blue-claro mb-4" />
+                <h3 className="font-semibold text-blue-main text-lg mb-2">{title}</h3>
+                <p className="text-base text-ink/60 leading-relaxed">
                   {description}
                 </p>
               </div>
@@ -170,6 +170,9 @@ const ServicosPage: React.FC = () => {
       {/* Seletor de área + benefícios */}
       <section className="py-16 sm:py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-12 flex flex-col items-center text-center">
+          <p className="text-xl lg:text-2xl text-blue-main mb-4">
+            Escolha aqui o serviço para ver mais informações
+          </p>
           <div className="w-full max-w-sm mb-10">
             <Select value={areaSelecionada} onValueChange={setAreaSelecionada}>
               <SelectTrigger className="w-full text-base py-3 border border-border-subtle rounded-md">
@@ -192,19 +195,19 @@ const ServicosPage: React.FC = () => {
 
           <div
             key={areaSelecionada}
-            className="w-full max-w-4xl border border-border-subtle rounded-lg p-6 sm:p-10 lg:p-14 animate-fade-in-up"
+            className="w-full max-w-5xl border border-border-subtle rounded-lg p-8 sm:p-12 lg:p-16 animate-fade-in-up"
           >
-            <h2 className="text-2xl sm:text-3xl font-semibold text-blue-main mb-8">
+            <h2 className="ext-3xl sm:text-4xl font-semibold text-blue-main mb-10">
               Serviços para {servicoAtual.titulo}
             </h2>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-x-12 sm:gap-y-6 mb-10 text-left">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-x-14 sm:gap-y-7 mb-10 text-left">
               {servicoAtual.beneficios.map((beneficio) => (
                 <div
                   key={beneficio}
-                  className="flex items-start space-x-3 text-ink/80"
+                  className="flex items-start space-x-3 text-ink/80 text-lg"
                 >
-                  <CircleCheckBig className="w-5 h-5 text-blue-claro mt-0.5 shrink-0" />
+                  <CircleCheckBig className="w-6 h-6 text-blue-claro mt-0.5 shrink-0" />
                   <span>{beneficio}</span>
                 </div>
               ))}
