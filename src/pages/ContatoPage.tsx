@@ -51,9 +51,9 @@ const ContatoPage: React.FC = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 lg:gap-12 max-w-6xl mx-auto items-stretch">
-          {/* Cards de contato — mais estilizados */}
-          <div className="grid sm:grid-cols-2 md:grid-cols-1 gap-5 content-start">
+        <div className="max-w-4xl mx-auto">
+          {/* Cards de contato — grid 2x2 */}
+          <div className="grid sm:grid-cols-2 gap-5 mb-5">
             {CONTACT_INFO.map(({ icon: Icon, title, lines }) => (
               <Card
                 key={title}
@@ -85,23 +85,24 @@ const ContatoPage: React.FC = () => {
             ))}
           </div>
 
-          {/* Card de CTA direto pro WhatsApp, no lugar do formulário */}
-          <Card className="flex flex-col h-full border-blue-main/15">
-            <CardContent className="p-8 sm:p-10 flex flex-col items-center text-center flex-1 justify-center">
-              <div className="bg-green-50 border border-green-200 p-4 rounded-full mb-6">
-                <MessageCircle className="w-10 h-10 text-green-600" />
+          {/* Card do WhatsApp — largura das 2 colunas juntas, formato horizontal */}
+          <Card className="border-blue-main/15">
+            <CardContent className="flex flex-col sm:flex-row items-center gap-6 p-6 sm:p-8">
+              <div className="bg-green-50 border border-green-200 p-4 rounded-full shrink-0">
+                <MessageCircle className="w-8 h-8 text-green-600" />
               </div>
-              <h2 className="text-2xl sm:text-3xl font-semibold text-blue-main tracking-tight mb-3">
-                Fale agora pelo WhatsApp
-              </h2>
-              <p className="text-ink/60 leading-relaxed mb-8 max-w-sm">
-                Sem formulários e sem espera: envie sua mensagem diretamente
-                para a nossa equipe e receba um retorno rápido, no horário
-                comercial.
-              </p>
+              <div className="flex-1 text-center sm:text-left">
+                <h2 className="text-xl sm:text-2xl font-semibold text-blue-main tracking-tight mb-1">
+                  Fale agora pelo WhatsApp
+                </h2>
+                <p className="text-ink/60 text-sm sm:text-base leading-relaxed">
+                  Sem formulários e sem espera: envie sua mensagem direto para
+                  nossa equipe e receba um retorno rápido, no horário comercial.
+                </p>
+              </div>
               <Button
                 onClick={handleWhatsApp}
-                className="bg-green-600 hover:bg-green-700 text-white px-8 py-6 text-lg font-semibold rounded-md w-full sm:w-auto"
+                className="bg-green-600 hover:bg-green-700 text-white px-8 py-6 text-base font-semibold rounded-md w-full sm:w-auto shrink-0"
               >
                 <MessageCircle className="w-5 h-5 mr-2" />
                 Enviar mensagem
