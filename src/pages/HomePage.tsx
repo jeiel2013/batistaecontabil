@@ -8,13 +8,23 @@ import {
   Phone,
   Mail,
 } from "lucide-react";
-import Home from "../assets/home.svg";
 import equipeFoto from "@/assets/sobre/equipe.jpg";
+
+// TODO: troque pelas fotos reais e pelos nomes/cargos dos sócios
+import socio1 from "@/assets/sobre/equipe.jpg";
+import socio2 from "@/assets/sobre/escritorio.jpg";
+import socio3 from "@/assets/sobre/equipe.jpg";
 
 const BENEFITS = [
   "Planos que cabem no seu bolso",
   "Sua empresa 100% regularizada",
   "Atendimento personalizado",
+];
+
+const LIDERANCA = [
+  { name: "Nome do sócio", role: "Sócio-fundador", photo: socio1 },
+  { name: "Nome da sócia", role: "Sócia-diretora", photo: socio2 },
+  { name: "Nome do contador", role: "Contador responsável", photo: socio3 },
 ];
 
 const VALUES_PREVIEW = [
@@ -38,16 +48,22 @@ const VALUES_PREVIEW = [
 const SERVICE_PREVIEW = [
   {
     label: "MEI",
-    description: "Formalização e emissão de notas simplificadas.",
+    items: ["Formalização simplificada", "Emissão de notas e DAS mensal"],
   },
-  { label: "Comércio", description: "Gestão de estoque e tributos otimizada." },
+  {
+    label: "Comércio",
+    items: ["Gestão de estoque integrada", "Tributação otimizada para o setor"],
+  },
   {
     label: "Prestador de Serviços",
-    description: "Notas fiscais e impostos sem burocracia.",
+    items: [
+      "Notas fiscais sem burocracia",
+      "Planejamento tributário sob medida",
+    ],
   },
   {
     label: "Indústria",
-    description: "Custos de produção e conformidade completa.",
+    items: ["Custos de produção sob controle", "Conformidade fiscal completa"],
   },
 ];
 
@@ -83,28 +99,42 @@ const HomePage: React.FC = () => {
 
             <Link
               to="/servicos"
-              className="inline-flex items-center gap-2 bg-blue-main text-white text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 rounded-md font-semibold hover:bg-blue-principal transition-colors duration-300 w-full sm:w-auto justify-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-accent"
+              className="inline-flex items-center gap-2 bg-blue-main text-white text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 rounded-md font-semibold hover:bg-blue-principal transition-smooth hover-lift w-full sm:w-auto justify-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-accent"
             >
               Conheça nossos planos
               <ArrowRight className="w-5 h-5" />
             </Link>
           </div>
 
-          <div className="flex-1 flex justify-center md:justify-end">
-            <img
-              src={Home}
-              alt="Ilustração de contabilidade digital"
-              width={480}
-              height={380}
-              fetchPriority="high"
-              className="w-full h-auto max-w-xs sm:max-w-sm md:max-w-md object-contain"
-            />
+          {/* Carrossel contínuo dos sócios */}
+          <div className="flex-1 w-full max-w-md md:max-w-lg overflow-hidden">
+            <div className="flex w-max animate-marquee">
+              {[...LIDERANCA, ...LIDERANCA].map((pessoa, i) => (
+                <div
+                  key={`${pessoa.name}-${i}`}
+                  className="w-40 sm:w-48 mx-3 shrink-0 text-center"
+                >
+                  <img
+                    src={pessoa.photo}
+                    alt={`${pessoa.name}, ${pessoa.role}`}
+                    width={192}
+                    height={240}
+                    loading="lazy"
+                    className="w-full aspect-[4/5] object-cover rounded-lg border border-border-subtle mb-3"
+                  />
+                  <p className="font-semibold text-blue-main text-sm">
+                    {pessoa.name}
+                  </p>
+                  <p className="text-muted-foreground text-xs">{pessoa.role}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* 2. Sobre — azul */}
-      <section className="py-16 sm:py-20 bg-blue-main">
+      {/* 2. Sobre — azul, texto e itens maiores */}
+      <section className="pt-16 sm:pt-20 pb-20 sm:pb-24 bg-blue-main">
         <div className="container mx-auto px-6 lg:px-12">
           <div className="grid md:grid-cols-2 gap-10 lg:gap-16 items-center mb-14">
             <img
@@ -115,21 +145,21 @@ const HomePage: React.FC = () => {
               loading="lazy"
               className="w-full h-auto aspect-[4/3] object-cover rounded-lg"
             />
-            <div className="space-y-5">
+            <div className="space-y-6">
               <span className="text-sm font-semibold tracking-wide text-gold-accent uppercase">
                 Quem somos
               </span>
               <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">
                 Perto do seu negócio, do jeito certo
               </h2>
-              <p className="text-blue-claro leading-relaxed">
+              <p className="text-blue-claro leading-relaxed text-lg sm:text-xl">
                 Somos uma empresa de contabilidade dedicada a oferecer soluções
                 personalizadas e acessíveis para o seu negócio crescer com
                 segurança e conformidade.
               </p>
               <Link
                 to="/sobre"
-                className="inline-flex items-center gap-1.5 text-blue-main font-semibold hover:text-blue-principal transition-colors duration-300 ease-fluid"
+                className="inline-flex items-center gap-1.5 text-white font-semibold hover:text-gold-accent transition-colors duration-300 ease-fluid"
               >
                 Conheça nossa história
                 <ArrowRight className="w-4 h-4" />
@@ -137,16 +167,15 @@ const HomePage: React.FC = () => {
             </div>
           </div>
 
-          {/* Mini-preview dos valores */}
-          <div className="grid sm:grid-cols-3 gap-4 sm:gap-6 border-t border-white/10 pt-10">
+          <div className="grid sm:grid-cols-3 gap-6 sm:gap-8 border-t border-white/10 pt-10">
             {VALUES_PREVIEW.map(({ icon: Icon, title, description }) => (
-              <div key={title} className="flex items-start gap-3">
-                <Icon className="w-5 h-5 text-gold-accent mt-0.5 shrink-0" />
+              <div key={title} className="flex items-start gap-4">
+                <Icon className="w-6 h-6 text-gold-accent mt-0.5 shrink-0" />
                 <div>
-                  <h3 className="text-white font-semibold text-sm mb-1">
+                  <h3 className="text-white font-semibold text-base mb-1">
                     {title}
                   </h3>
-                  <p className="text-blue-claro text-sm leading-relaxed">
+                  <p className="text-blue-claro text-base leading-relaxed">
                     {description}
                   </p>
                 </div>
@@ -156,7 +185,7 @@ const HomePage: React.FC = () => {
         </div>
       </section>
 
-      {/* 3. Serviços — branco */}
+      {/* 3. Serviços — branco, cards maiores e com mais texto */}
       <section className="py-16 sm:py-20 bg-background">
         <div className="container mx-auto px-6 lg:px-12 text-center">
           <span className="text-sm font-semibold tracking-wide text-gold-accent uppercase">
@@ -165,24 +194,32 @@ const HomePage: React.FC = () => {
           <h2 className="text-3xl sm:text-4xl font-bold text-blue-main tracking-tight mt-2 mb-10">
             Soluções para cada tipo de negócio
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-10 text-left">
-            {SERVICE_PREVIEW.map(({ label, description }) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 sm:gap-6 mb-10 text-left">
+            {SERVICE_PREVIEW.map(({ label, items }) => (
               <div
                 key={label}
-                className="border border-border-subtle rounded-lg py-6 px-5 hover:border-blue-claro transition-smooth"
+                className="border border-border-subtle rounded-lg py-8 px-6 hover:border-blue-claro transition-smooth"
               >
-                <span className="font-semibold text-blue-main block mb-1.5">
+                <span className="font-semibold text-blue-main text-lg block mb-3">
                   {label}
                 </span>
-                <span className="text-sm text-ink/60 leading-relaxed">
-                  {description}
-                </span>
+                <ul className="space-y-2">
+                  {items.map((item) => (
+                    <li
+                      key={item}
+                      className="flex items-start gap-2 text-sm text-ink/70 leading-relaxed"
+                    >
+                      <CircleCheckBig className="w-4 h-4 text-blue-claro mt-0.5 shrink-0" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             ))}
           </div>
           <Link
             to="/servicos"
-            className="inline-flex items-center gap-2 border border-blue-main text-blue-main px-6 py-3 rounded-md font-semibold hover:bg-blue-main hover:text-white transition-colors duration-300"
+            className="inline-flex items-center gap-2 border border-blue-main text-blue-main px-6 py-3 rounded-md font-semibold hover:bg-blue-main hover:text-white transition-smooth hover-lift"
           >
             Ver todos os serviços
             <ArrowRight className="w-4 h-4" />
@@ -203,7 +240,7 @@ const HomePage: React.FC = () => {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8">
             <Link
               to="/contato"
-              className="inline-flex items-center gap-2 bg-white text-blue-main px-8 py-4 rounded-md font-semibold hover:bg-gold-accent hover:text-white transition-colors duration-300"
+              className="inline-flex items-center gap-2 bg-white text-blue-main px-8 py-4 rounded-md font-semibold hover:bg-gold-accent hover:text-white transition-smooth hover-lift"
             >
               Entrar em contato
               <ArrowRight className="w-5 h-5" />
