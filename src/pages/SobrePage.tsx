@@ -1,4 +1,3 @@
-import * as React from "react";
 import {
   ShieldCheck,
   HeartHandshake,
@@ -6,12 +5,6 @@ import {
   Users,
   Sparkles,
 } from "lucide-react";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-} from "@/components/ui/carousel";
-import Autoplay from "embla-carousel-autoplay";
 import { Card, CardContent } from "@/components/ui/card";
 import equipeFoto from "@/assets/sobre/equipe.jpg";
 import escritorioFoto from "@/assets/sobre/escritorio.jpg";
@@ -20,40 +13,42 @@ const VALUES = [
   {
     icon: ShieldCheck,
     title: "Segurança",
-    description: "Sua empresa sempre regularizada, sem surpresas no caminho.",
+    description:
+      "Sua empresa sempre regularizada, sem surpresas no caminho. Acompanhamos prazos e obrigações de perto, para que você não precise se preocupar com isso.",
   },
   {
     icon: HeartHandshake,
     title: "Compromisso",
-    description: "Acompanhamento próximo, como parte do seu time.",
+    description:
+      "Acompanhamento próximo, como parte do seu time. Entendemos a rotina do seu negócio para dar respostas que fazem sentido pra sua realidade.",
   },
   {
     icon: TrendingUp,
     title: "Crescimento",
-    description: "Planejamento tributário pensado para escalar seu negócio.",
+    description:
+      "Planejamento tributário pensado para escalar seu negócio, com orientação sobre o melhor regime e as melhores decisões em cada fase da empresa.",
   },
   {
     icon: Users,
     title: "Atendimento humano",
-    description: "Conversas diretas, sem burocracia ou respostas automáticas.",
+    description:
+      "Conversas diretas, sem burocracia ou respostas automáticas. Você fala com quem realmente entende da sua contabilidade.",
   },
   {
     icon: Sparkles,
     title: "Transparência",
-    description: "Clareza total sobre impostos, prazos e obrigações.",
+    description:
+      "Clareza total sobre impostos, prazos e obrigações, para que toda decisão seja tomada com informação completa e sem letras miúdas.",
   },
 ];
 
 const SobrePage: React.FC = () => {
-  const plugin = React.useRef(
-    Autoplay({ delay: 3200, stopOnInteraction: true }),
-  );
-
   return (
     <>
+      {/* Componente principal: texto mais completo, imagem reduzida */}
       <section className="py-16 sm:py-20">
-        <div className="container mx-auto px-6 lg:px-12 grid md:grid-cols-2 gap-12 lg:gap-16 items-center">
-          <div className="space-y-5 order-2 md:order-1">
+        <div className="container mx-auto px-6 lg:px-12 grid md:grid-cols-5 gap-12 lg:gap-16 items-center">
+          <div className="space-y-5 md:col-span-3 order-2 md:order-1">
             <span className="text-sm font-semibold tracking-wide text-gold-accent uppercase">
               Quem somos
             </span>
@@ -63,20 +58,38 @@ const SobrePage: React.FC = () => {
             <h2 className="text-xl sm:text-2xl text-muted-foreground font-medium">
               Contabilidade completa para pequenas e médias empresas
             </h2>
-            <p className="text-ink/70 leading-relaxed">
-              Somos uma empresa de contabilidade dedicada a oferecer soluções
-              personalizadas e acessíveis para o seu negócio crescer com
-              segurança e conformidade.
-            </p>
+
+            <div className="space-y-4 text-ink/70 leading-relaxed">
+              <p>
+                Somos uma empresa de contabilidade dedicada a oferecer soluções
+                personalizadas e acessíveis para o seu negócio crescer com
+                segurança e conformidade. Atendemos empresários de diferentes
+                setores — do MEI à indústria — entendendo que cada tipo de
+                negócio tem particularidades fiscais e operacionais próprias.
+              </p>
+              <p>
+                Nosso trabalho vai além de entregar guias e declarações em dia:
+                acompanhamos de perto o momento da sua empresa para indicar o
+                regime tributário mais vantajoso, antecipar obrigações e evitar
+                surpresas que possam pesar no caixa do seu negócio.
+              </p>
+              <p>
+                Acreditamos em um atendimento próximo e sem burocracia — por
+                isso priorizamos conversas diretas, canais rápidos como o
+                WhatsApp, e explicações claras sobre cada decisão contábil, sem
+                jargão desnecessário.
+              </p>
+            </div>
           </div>
-          <div className="order-1 md:order-2">
+
+          <div className="md:col-span-2 order-1 md:order-2">
             <img
               src={equipeFoto}
               alt="Equipe da Batista E-Contábil em atendimento"
-              width={480}
-              height={600}
+              width={340}
+              height={425}
               loading="lazy"
-              className="w-full h-auto aspect-[4/5] object-cover rounded-lg border border-border-subtle"
+              className="w-full max-w-xs sm:max-w-sm mx-auto md:max-w-none h-auto aspect-[4/5] object-cover rounded-lg border border-border-subtle"
             />
           </div>
         </div>
@@ -96,9 +109,10 @@ const SobrePage: React.FC = () => {
         </div>
       </section>
 
+      {/* Nossos valores — grid de cards, sem carrossel */}
       <section className="py-16 sm:py-20 bg-surface-muted border-t border-border-subtle">
         <div className="container mx-auto px-6 lg:px-12">
-          <div className="text-center mb-10">
+          <div className="text-center mb-12">
             <span className="text-sm font-semibold tracking-wide text-gold-accent uppercase">
               Nossos valores
             </span>
@@ -106,28 +120,24 @@ const SobrePage: React.FC = () => {
               O que guia nosso trabalho
             </h2>
           </div>
-          <div className="max-w-2xl mx-auto">
-            <Carousel plugins={[plugin.current]} className="w-full">
-              <CarouselContent>
-                {VALUES.map(({ icon: Icon, title, description }) => (
-                  <CarouselItem key={title}>
-                    <div className="p-1">
-                      <Card>
-                        <CardContent className="flex flex-col items-center justify-center text-center gap-4 min-h-[240px] p-8">
-                          <Icon className="w-8 h-8 text-blue-claro" />
-                          <h3 className="text-xl font-semibold text-blue-main">
-                            {title}
-                          </h3>
-                          <p className="text-ink/60 text-sm leading-relaxed max-w-xs">
-                            {description}
-                          </p>
-                        </CardContent>
-                      </Card>
-                    </div>
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-            </Carousel>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-5xl mx-auto">
+            {VALUES.map(({ icon: Icon, title, description }) => (
+              <Card
+                key={title}
+                className="hover:border-blue-claro transition-smooth"
+              >
+                <CardContent className="flex flex-col gap-4 p-8">
+                  <Icon className="w-9 h-9 text-blue-claro" />
+                  <h3 className="text-2xl font-semibold text-blue-main">
+                    {title}
+                  </h3>
+                  <p className="text-ink/70 text-lg leading-relaxed">
+                    {description}
+                  </p>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </div>
       </section>
