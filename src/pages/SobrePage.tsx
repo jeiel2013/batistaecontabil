@@ -1,3 +1,4 @@
+import * as React from "react";
 import {
   ShieldCheck,
   HeartHandshake,
@@ -6,6 +7,12 @@ import {
   Sparkles,
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
 import equipeFoto from "@/assets/sobre/equipe.jpg";
 import escritorioFoto from "@/assets/sobre/escritorio.jpg";
 
@@ -43,6 +50,10 @@ const VALUES = [
 ];
 
 const SobrePage: React.FC = () => {
+  const autoplayPlugin = React.useRef(
+    Autoplay({ delay: 2800, stopOnInteraction: false }),
+  );
+
   return (
     <>
       {/* Componente principal: texto mais completo, imagem reduzida */}
@@ -109,7 +120,7 @@ const SobrePage: React.FC = () => {
         </div>
       </section>
 
-      {/* Nossos valores — grid de cards, sem carrossel */}
+      {/* Nossos valores — carrossel arrastável, 3 cards visíveis, autoplay contínuo */}
       <section className="py-16 sm:py-20 bg-surface-muted border-t border-border-subtle">
         <div className="container mx-auto px-6 lg:px-12">
           <div className="text-center mb-12">
@@ -121,24 +132,32 @@ const SobrePage: React.FC = () => {
             </h2>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-5xl mx-auto">
-            {VALUES.map(({ icon: Icon, title, description }) => (
-              <Card
-                key={title}
-                className="hover:border-blue-claro transition-smooth"
-              >
-                <CardContent className="flex flex-col gap-4 p-8">
-                  <Icon className="w-9 h-9 text-blue-claro" />
-                  <h3 className="text-2xl font-semibold text-blue-main">
-                    {title}
-                  </h3>
-                  <p className="text-ink/70 text-lg leading-relaxed">
-                    {description}
-                  </p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+          <Carousel
+            opts={{ loop: true, align: "start" }}
+            plugins={[autoplayPlugin.current]}
+            className="w-full max-w-6xl mx-auto cursor-grab active:cursor-grabbing"
+          >
+            <CarouselContent className="-ml-4 sm:-ml-6">
+              {VALUES.map(({ icon: Icon, title, description }) => (
+                <CarouselItem
+                  key={title}
+                  className="pl-4 sm:pl-6 basis-[85%] sm:basis-1/2 lg:basis-1/3"
+                >
+                  <Card className="h-full select-none">
+                    <CardContent className="flex flex-col gap-4 p-8 h-full">
+                      <Icon className="w-9 h-9 text-blue-claro" />
+                      <h3 className="text-2xl font-semibold text-blue-main">
+                        {title}
+                      </h3>
+                      <p className="text-ink/70 text-lg leading-relaxed">
+                        {description}
+                      </p>
+                    </CardContent>
+                  </Card>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+          </Carousel>
         </div>
       </section>
     </>
