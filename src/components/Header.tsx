@@ -28,10 +28,10 @@ const Header: React.FC = () => {
   }, [isMenuOpen]);
 
   const navLinkClass = ({ isActive }: { isActive: boolean }) =>
-    `relative transition-colors duration-300 ease-fluid after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:bg-gold-accent after:transition-[width] after:duration-300 after:ease-fluid ${
+    `relative transition-colors duration-300 ease-fluid after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-full after:bg-gold-accent after:origin-left after:transition-transform after:duration-300 after:ease-fluid ${
       isActive
-        ? "text-white font-semibold after:w-full"
-        : "text-white/80 hover:text-white after:w-0 hover:after:w-full"
+        ? "text-white font-semibold after:scale-x-100"
+        : "text-white/80 hover:text-white after:scale-x-0 hover:after:scale-x-100"
     }`;
 
   return (
