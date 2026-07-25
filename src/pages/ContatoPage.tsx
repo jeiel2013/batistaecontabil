@@ -1,8 +1,5 @@
-import { useState } from "react";
-import { Mail, Phone, MapPin, Clock, Send, CheckCircle2 } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, MessageCircle } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 
 const CONTACT_INFO = [
@@ -28,47 +25,15 @@ const CONTACT_INFO = [
   },
 ];
 
-type FormState = {
-  nome: string;
-  email: string;
-  telefone: string;
-  mensagem: string;
-};
-const INITIAL_FORM: FormState = {
-  nome: "",
-  email: "",
-  telefone: "",
-  mensagem: "",
-};
-const LABEL_CLASS =
-  "block text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-2";
-
 const ContatoPage: React.FC = () => {
-  const [form, setForm] = useState<FormState>(INITIAL_FORM);
-  const [sent, setSent] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-
-  const handleChange =
-    (field: keyof FormState) =>
-    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
-      setForm((prev) => ({ ...prev, [field]: e.target.value }));
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setError(null);
-    if (!form.nome.trim() || !form.email.trim() || !form.mensagem.trim()) {
-      setError("Preencha nome, e-mail e mensagem para continuar.");
-      return;
-    }
+  const handleWhatsApp = () => {
     const telefone = "5531999999999";
-    const mensagem = `Olá! Meu nome é ${form.nome}.%0AE-mail: ${form.email}%0ATelefone: ${form.telefone || "não informado"}%0A%0A${form.mensagem}`;
+    const mensagem = "Olá! Gostaria de falar com a Batista E-Contábil.";
     window.open(
       `https://wa.me/${telefone}?text=${encodeURIComponent(mensagem)}`,
       "_blank",
       "noopener,noreferrer",
     );
-    setSent(true);
-    setForm(INITIAL_FORM);
   };
 
   return (
@@ -87,15 +52,19 @@ const ContatoPage: React.FC = () => {
         </div>
 
         <div className="grid md:grid-cols-2 gap-8 lg:gap-12 max-w-6xl mx-auto items-stretch">
-          <div className="space-y-4 flex flex-col">
+          {/* Cards de contato — mais estilizados */}
+          <div className="grid sm:grid-cols-2 md:grid-cols-1 gap-5 content-start">
             {CONTACT_INFO.map(({ icon: Icon, title, lines }) => (
-              <Card key={title}>
-                <CardContent className="flex items-start gap-3 p-4 sm:p-5">
-                  <div className="border border-border-subtle p-2 rounded-md shrink-0">
-                    <Icon className="w-5 h-5 text-blue-main" />
+              <Card
+                key={title}
+                className="hover:border-blue-claro transition-smooth"
+              >
+                <CardContent className="flex items-start gap-4 p-6">
+                  <div className="bg-blue-main/5 border border-blue-main/10 p-3 rounded-lg shrink-0">
+                    <Icon className="w-6 h-6 text-blue-main" />
                   </div>
                   <div className="min-w-0">
-                    <span className="block text-xs font-semibold uppercase tracking-wide text-gold-accent mb-1">
+                    <span className="block text-xs font-semibold uppercase tracking-wide text-gold-accent mb-1.5">
                       {title}
                     </span>
                     {lines.map((line, i) => (
@@ -103,7 +72,7 @@ const ContatoPage: React.FC = () => {
                         key={line}
                         className={
                           i === 0
-                            ? "text-ink font-medium text-sm sm:text-base break-words"
+                            ? "text-ink font-medium text-base break-words"
                             : "text-ink/60 text-sm break-words"
                         }
                       >
@@ -116,98 +85,29 @@ const ContatoPage: React.FC = () => {
             ))}
           </div>
 
-          <div className="flex flex-col h-full">
-            <Card className="flex flex-col h-full">
-              <CardContent className="p-6 sm:p-8 flex flex-col flex-1">
-                <h2 className="text-2xl sm:text-3xl font-semibold text-blue-main tracking-tight mb-1">
-                  Envie uma Mensagem
-                </h2>
-                <p className="text-sm text-muted-foreground mb-6">
-                  Respondemos pelo WhatsApp em horário comercial.
-                </p>
-
-                {sent && (
-                  <div className="flex items-center gap-2 text-green-700 bg-green-50 border border-green-200 rounded-md px-4 py-3 mb-5 text-sm">
-                    <CheckCircle2 className="w-5 h-5 shrink-0" />
-                    <span>
-                      Mensagem pronta! Continue o envio pelo WhatsApp que
-                      abrimos para você.
-                    </span>
-                  </div>
-                )}
-
-                <form
-                  className="space-y-5 flex flex-col flex-1"
-                  onSubmit={handleSubmit}
-                  noValidate
-                >
-                  <div>
-                    <label htmlFor="nome" className={LABEL_CLASS}>
-                      Nome Completo
-                    </label>
-                    <Input
-                      id="nome"
-                      type="text"
-                      placeholder="Seu nome"
-                      value={form.nome}
-                      onChange={handleChange("nome")}
-                      autoComplete="name"
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="email" className={LABEL_CLASS}>
-                      E-mail
-                    </label>
-                    <Input
-                      id="email"
-                      type="email"
-                      placeholder="seu@email.com"
-                      value={form.email}
-                      onChange={handleChange("email")}
-                      autoComplete="email"
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="telefone" className={LABEL_CLASS}>
-                      Telefone
-                    </label>
-                    <Input
-                      id="telefone"
-                      type="tel"
-                      placeholder="(00) 00000-0000"
-                      value={form.telefone}
-                      onChange={handleChange("telefone")}
-                      autoComplete="tel"
-                    />
-                  </div>
-                  <div className="flex-1 flex flex-col">
-                    <label htmlFor="mensagem" className={LABEL_CLASS}>
-                      Mensagem
-                    </label>
-                    <Textarea
-                      id="mensagem"
-                      placeholder="Como podemos ajudar?"
-                      className="resize-none flex-1"
-                      value={form.mensagem}
-                      onChange={handleChange("mensagem")}
-                      required
-                    />
-                  </div>
-                  {error && (
-                    <p className="text-sm text-destructive" role="alert">
-                      {error}
-                    </p>
-                  )}
-                  <Button type="submit" className="w-full text-lg py-6 mt-auto">
-                    <Send className="w-5 h-5 mr-2" />
-                    Enviar Mensagem
-                  </Button>
-                </form>
-              </CardContent>
-            </Card>
-          </div>
+          {/* Card de CTA direto pro WhatsApp, no lugar do formulário */}
+          <Card className="flex flex-col h-full border-blue-main/15">
+            <CardContent className="p-8 sm:p-10 flex flex-col items-center text-center flex-1 justify-center">
+              <div className="bg-green-50 border border-green-200 p-4 rounded-full mb-6">
+                <MessageCircle className="w-10 h-10 text-green-600" />
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-semibold text-blue-main tracking-tight mb-3">
+                Fale agora pelo WhatsApp
+              </h2>
+              <p className="text-ink/60 leading-relaxed mb-8 max-w-sm">
+                Sem formulários e sem espera: envie sua mensagem diretamente
+                para a nossa equipe e receba um retorno rápido, no horário
+                comercial.
+              </p>
+              <Button
+                onClick={handleWhatsApp}
+                className="bg-green-600 hover:bg-green-700 text-white px-8 py-6 text-lg font-semibold rounded-md w-full sm:w-auto"
+              >
+                <MessageCircle className="w-5 h-5 mr-2" />
+                Enviar mensagem
+              </Button>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </section>
