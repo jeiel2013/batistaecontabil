@@ -40,13 +40,13 @@ const ContatoPage: React.FC = () => {
     <section className="py-16 sm:py-20">
       <div className="container mx-auto px-6 lg:px-12">
         <div className="text-center mb-12">
-          <span className="text-sm font-semibold tracking-wide text-gold-accent uppercase">
+          <span className="text-base sm:text-lg font-semibold tracking-wide text-gold-accent uppercase">
             Fale com a gente
           </span>
           <h1 className="text-4xl sm:text-5xl font-extrabold text-blue-main tracking-tight mt-2 mb-4">
             Entre em Contato
           </h1>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-lg text-blue-main max-w-2xl mx-auto">
             Estamos prontos para ajudar sua empresa a crescer. Fale conosco!
           </p>
         </div>
@@ -57,14 +57,14 @@ const ContatoPage: React.FC = () => {
             {CONTACT_INFO.map(({ icon: Icon, title, lines }) => (
               <Card
                 key={title}
-                className="hover:border-blue-claro transition-smooth"
+                className="border-t-2 border-t-gold-accent hover:border-blue-claro transition-smooth"
               >
                 <CardContent className="flex items-start gap-4 p-6">
                   <div className="bg-blue-main/5 border border-blue-main/10 p-3 rounded-lg shrink-0">
                     <Icon className="w-6 h-6 text-blue-main" />
                   </div>
                   <div className="min-w-0">
-                    <span className="block text-xs font-semibold uppercase tracking-wide text-gold-accent mb-1.5">
+                    <span className="block text-sm font-semibold uppercase tracking-wide text-gold-accent mb-1.5">
                       {title}
                     </span>
                     {lines.map((line, i) => (
@@ -72,8 +72,8 @@ const ContatoPage: React.FC = () => {
                         key={line}
                         className={
                           i === 0
-                            ? "text-ink font-medium text-base break-words"
-                            : "text-ink/60 text-sm break-words"
+                            ? "text-ink font-medium text-lg break-words"
+                            : "text-ink/60 text-base break-words"
                         }
                       >
                         {line}
@@ -86,7 +86,7 @@ const ContatoPage: React.FC = () => {
           </div>
 
           {/* Card do WhatsApp — largura das 2 colunas juntas, formato horizontal */}
-          <Card className="border-blue-main/15">
+          <Card className="border-blue-main/15 bg-green-50/40">
             <CardContent className="flex flex-col sm:flex-row items-center gap-6 p-6 sm:p-8">
               <div className="bg-green-50 border border-green-200 p-4 rounded-full shrink-0">
                 <MessageCircle className="w-8 h-8 text-green-600" />
